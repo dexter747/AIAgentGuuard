@@ -1,0 +1,46 @@
+{
+  "name": "n8n-nodes-overseex",
+  "version": "0.1.0",
+  "description": "n8n community node for OverseeX - AI Agent Monitoring & Testing",
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "overseex",
+    "ai",
+    "agent",
+    "monitoring",
+    "tracing"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint . --ext .ts",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "OverseeX Team",
+  "license": "MIT",
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/OverseeXApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/OverseeX/OverseeX.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "gulp": "^4.0.2",
+    "n8n-workflow": "^1.0.0",
+    "typescript": "^5.3.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/overseex/n8n-nodes-overseex"
+  },
+  "homepage": "https://overseex.com"
+}

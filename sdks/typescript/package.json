@@ -1,0 +1,77 @@
+{
+  "name": "overseex",
+  "version": "0.2.2",
+  "description": "OverseeX SDK for AI agent monitoring and multi-agent coordination intelligence",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "overseex",
+    "ai",
+    "agent",
+    "monitoring",
+    "tracing",
+    "observability",
+    "multi-agent",
+    "coordination",
+    "langchain",
+    "openai",
+    "anthropic",
+    "llm"
+  ],
+  "author": "OverseeX Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/overseex/overseex-js"
+  },
+  "homepage": "https://overseex.com/docs",
+  "bugs": {
+    "url": "https://github.com/overseex/overseex-js/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "eslint": "^8.55.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.4"
+  },
+  "peerDependencies": {
+    "openai": ">=4.0.0",
+    "@anthropic-ai/sdk": ">=0.9.0",
+    "@langchain/core": ">=0.1.0"
+  },
+  "peerDependenciesMeta": {
+    "openai": {
+      "optional": true
+    },
+    "@anthropic-ai/sdk": {
+      "optional": true
+    },
+    "@langchain/core": {
+      "optional": true
+    }
+  }
+}

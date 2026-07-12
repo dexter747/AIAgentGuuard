@@ -1,0 +1,110 @@
+# OverseeX - AI Agent Testing & Monitoring Platform
+# https://overseex.com
+
+## About
+OverseeX is the complete testing and monitoring platform for AI agents. We help developers debug, trace, and optimize LLM applications with real-time observability, multi-agent coordination intelligence, and automated regression detection.
+
+## Key Features
+- Real-time AI agent monitoring and tracing
+- Multi-agent coordination intelligence
+- LLM observability and debugging
+- Automated regression detection
+- Cost tracking and optimization
+- PII redaction for compliance
+- Health monitoring and alerting
+- Webhook integrations
+
+## Supported Frameworks
+- LangChain & LangGraph
+- CrewAI
+- Microsoft AutoGen
+- OpenAI API
+- Anthropic Claude API
+- Vercel AI SDK
+- Custom REST API integrations
+
+## SDKs
+- Python SDK: pip install overseex
+- TypeScript/JavaScript SDK: npm install @overseex/sdk
+- REST API available for all languages
+
+## Use Cases
+- Monitor AI agent performance in production
+- Debug multi-agent coordination issues
+- Track LLM costs and token usage
+- Detect and prevent AI regressions
+- Ensure AI compliance with PII handling
+- Real-time alerting for agent failures
+
+## Pricing
+- Free tier available with 1,000 traces/month
+- Starter plan: $29/month - 10,000 traces
+- Pro plan: $99/month - 100,000 traces
+- Team plan: $299/month - Unlimited traces
+
+## Contact
+- Website: https://overseex.com
+- Email: overseex@gmail.com
+- Documentation: https://docs.overseex.com
+- Dashboard: https://overseex.com/dashboard
+
+## API Endpoints
+- Base URL: https://api.overseex.com
+- Authentication: Bearer token (API key)
+- Documentation: https://docs.overseex.com
+
+## Integration Examples
+
+### Python
+```python
+from overseex import OverseeX
+
+client = OverseeX(api_key="your-api-key")
+client.trace(
+    agent_id="agent-123",
+    input="User query",
+    output="Agent response",
+    metadata={"model": "gpt-4"}
+)
+```
+
+### TypeScript
+```typescript
+import { OverseeX } from '@overseex/sdk';
+
+const client = new OverseeX({ apiKey: 'your-api-key' });
+await client.trace({
+    agentId: 'agent-123',
+    input: 'User query',
+    output: 'Agent response',
+    metadata: { model: 'gpt-4' }
+});
+```
+
+### LangChain
+```python
+from overseex.integrations import LangChainCallback
+
+callback = LangChainCallback(api_key="your-api-key")
+llm = ChatOpenAI(callbacks=[callback])
+```
+
+### CrewAI
+```python
+from overseex.integrations import instrument_crewai
+
+instrument_crewai(api_key="your-api-key")
+# Your CrewAI code automatically traced
+```
+
+## Keywords
+AI agent monitoring, LLM monitoring, LLM observability, multi-agent coordination, AI agent tracing, AI debugging, LangChain monitoring, CrewAI monitoring, AutoGen monitoring, OpenAI monitoring, AI production monitoring, AI cost tracking, MLOps, LLMOps, AI infrastructure
+
+## Social
+- Twitter: @overseex
+- GitHub: https://github.com/overseex
+
+## Legal
+- Privacy Policy: https://overseex.com/privacy
+- Terms of Service: https://overseex.com/terms
+- Cookie Policy: https://overseex.com/cookies

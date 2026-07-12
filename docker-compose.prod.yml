@@ -1,0 +1,151 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: agentguard-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-agentguard}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - agentguard-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: agentguard-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - agentguard-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: agentguard-backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-agentguard}
+      REDIS_URL: redis://redis:6379
+      SECRET_KEY: ${SECRET_KEY}
+      ALGORITHM: ${ALGORITHM:-HS256}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES:-30}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      FROM_EMAIL: ${FROM_EMAIL}
+      SMTP_USE_TLS: ${SMTP_USE_TLS:-true}
+      DODO_API_KEY: ${DODO_API_KEY}
+      DODO_WEBHOOK_SECRET: ${DODO_WEBHOOK_SECRET}
+      APP_URL: https://overseex.com
+      ENVIRONMENT: production
+      CORS_ORIGINS: https://overseex.com,https://www.overseex.com,https://admin.overseex.com,https://docs.overseex.com,https://api.overseex.com
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - agentguard-network
+    ports:
+      - "8000:8000"
+
+  web:
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: https://api.overseex.com
+    container_name: agentguard-web
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: https://api.overseex.com
+    depends_on:
+      - backend
+    networks:
+      - agentguard-network
+    ports:
+      - "3000:3000"
+
+  admin:
+    build:
+      context: .
+      dockerfile: ./apps/admin/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: https://api.overseex.com
+    container_name: agentguard-admin
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: https://api.overseex.com
+    depends_on:
+      - backend
+    networks:
+      - agentguard-network
+    ports:
+      - "3001:3001"
+
+  docs:
+    build:
+      context: ./apps/docs
+      dockerfile: Dockerfile
+    container_name: agentguard-docs
+    restart: unless-stopped
+    depends_on:
+      - backend
+    networks:
+      - agentguard-network
+    ports:
+      - "3002:3002"
+
+  nginx:
+    image: nginx:alpine
+    container_name: agentguard-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - certbot_data:/var/www/certbot
+    depends_on:
+      - web
+      - admin
+      - docs
+      - backend
+    networks:
+      - agentguard-network
+
+  certbot:
+    image: certbot/certbot
+    container_name: agentguard-certbot
+    volumes:
+      - ./nginx/ssl:/etc/letsencrypt
+      - certbot_data:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+volumes:
+  postgres_data:
+  redis_data:
+  certbot_data:
+
+networks:
+  agentguard-network:
+    driver: bridge

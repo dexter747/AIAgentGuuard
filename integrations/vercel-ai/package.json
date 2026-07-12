@@ -1,0 +1,48 @@
+{
+  "name": "@overseex/vercel-ai",
+  "version": "0.1.0",
+  "description": "OverseeX integration for Vercel AI SDK - automatic tracing for AI applications",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "vitest"
+  },
+  "keywords": [
+    "vercel",
+    "ai",
+    "sdk",
+    "tracing",
+    "monitoring",
+    "overseex",
+    "llm"
+  ],
+  "author": "OverseeX Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "ai": ">=3.0.0"
+  },
+  "dependencies": {
+    "overseex": "^0.2.0"
+  },
+  "devDependencies": {
+    "ai": "^3.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/overseex/integrations"
+  },
+  "homepage": "https://overseex.com"
+}

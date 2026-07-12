@@ -1,0 +1,14 @@
+-r requirements.txt
+
+# Development tools
+ipython==8.20.0
+watchdog==3.0.0
+
+# Testing
+pytest-cov==4.1.0
+faker==22.0.0
+factory-boy==3.3.0
+
+# Documentation
+mkdocs==1.5.3
+mkdocs-material==9.5.3

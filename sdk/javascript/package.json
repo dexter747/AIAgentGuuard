@@ -1,0 +1,40 @@
+{
+  "name": "@overseex/sdk",
+  "version": "1.0.0",
+  "description": "JavaScript/TypeScript SDK for OverseeX - AI Agent Testing & Monitoring",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "agent",
+    "testing",
+    "monitoring",
+    "ai",
+    "llm",
+    "tracing"
+  ],
+  "author": "OverseeX Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "ts-jest": "^29.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/overseex/sdk-javascript"
+  },
+  "homepage": "https://overseex.com",
+  "bugs": {
+    "url": "https://github.com/overseex/sdk-javascript/issues"
+  }
+}

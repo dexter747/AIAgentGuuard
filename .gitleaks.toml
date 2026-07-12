@@ -1,0 +1,19 @@
+title = "AgentGuard gitleaks config"
+[extend]
+useDefault = true
+[allowlist]
+description = "Docs examples, test fixtures, redaction regex patterns, and dev-default configs — verified no real secrets"
+paths = [
+  '''\.md$''',
+  '''(^|/)docs/''',
+  '''(^|/)project-docs/''',
+  '''(^|/)apps/docs/''',
+  '''(^|/)sdks/''',
+  '''(^|/)integrations/n8n-node/''',
+  '''backend/app/services/pii_redaction\.py''',
+  '''backend/app/core/config\.py''',
+  '''backend/tests/''',
+  '''backend/app/api/v1/endpoints/api_keys\.py''',
+  '''docker-compose.*\.yml''',
+  '''(^|/)\.github/workflows/''',
+]

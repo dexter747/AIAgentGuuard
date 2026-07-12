@@ -1,0 +1,49 @@
+{
+  "name": "@overseex/langchain",
+  "version": "0.1.0",
+  "description": "OverseeX integration for LangChain.js - automatic tracing for chains and agents",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --watch",
+    "test": "vitest"
+  },
+  "keywords": [
+    "langchain",
+    "tracing",
+    "monitoring",
+    "overseex",
+    "ai",
+    "llm",
+    "agents"
+  ],
+  "author": "OverseeX Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "@langchain/core": ">=0.1.0"
+  },
+  "dependencies": {
+    "overseex": "^0.2.0"
+  },
+  "devDependencies": {
+    "@langchain/core": "^0.1.0",
+    "@langchain/openai": "^0.0.10",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/overseex/integrations"
+  },
+  "homepage": "https://overseex.com"
+}

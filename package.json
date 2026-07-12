@@ -1,0 +1,31 @@
+{
+  "name": "overseex-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OverseeX - AI Agent Testing & Monitoring Platform",
+  "scripts": {
+    "dev": "./dev.sh",
+    "dev:web": "pnpm --filter @overseex/web dev",
+    "dev:admin": "pnpm --filter @overseex/admin dev",
+    "dev:docs": "pnpm --filter @overseex/docs dev",
+    "dev:backend": "cd backend && . ./venv/bin/activate && python main.py",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "build": "pnpm --recursive build",
+    "build:web": "pnpm --filter @overseex/web build",
+    "build:admin": "pnpm --filter @overseex/admin build",
+    "build:docs": "pnpm --filter @overseex/docs build",
+    "lint": "pnpm --recursive lint",
+    "test": "pnpm --recursive test",
+    "clean": "pnpm --recursive clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "^1.11.3",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

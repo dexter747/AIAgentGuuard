@@ -1,0 +1,48 @@
+{
+  "name": "@overseex/openai",
+  "version": "0.1.0",
+  "description": "OverseeX integration for OpenAI - automatic tracing for GPT calls",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --watch",
+    "test": "vitest"
+  },
+  "keywords": [
+    "openai",
+    "gpt",
+    "tracing",
+    "monitoring",
+    "overseex",
+    "ai",
+    "llm"
+  ],
+  "author": "OverseeX Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "openai": ">=4.0.0"
+  },
+  "dependencies": {
+    "overseex": "^0.2.0"
+  },
+  "devDependencies": {
+    "openai": "^4.20.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/overseex/integrations"
+  },
+  "homepage": "https://overseex.com"
+}
